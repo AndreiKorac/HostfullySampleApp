@@ -3,16 +3,34 @@
     <head>
         <link rel="stylesheet" href="../css/bootstrap.min.css">
         <script src="../js/bootstrap.min.js"></script>
+        <style>
+            .blog-card {
+                height: 150px;
+                margin-bottom: 30px;
+                padding: 12px;
+                border-radius: 5px;
+                box-shadow: 3px 3px 5px 6px #ccc;
+            }
+
+            a { cursor: pointer; }
+        </style>
     </head>
     <body>
         <div class="container">
-            <h2>MyBlog</h2>
+            <div class="row" style="height:200px">
+                <h2>MyBlog</h2>
+            </div>
+            <form action ="jsp/new-employee.jsp">
+                <button type="submit" class="btn btn-primary btn-md">New Post</button>
+                <br></br>
+            </form>
             <c:choose>
                 <c:when test="${not empty posts}">
                     <c:forEach var="post" items="${posts}">
-                        <div>
-                            <p>${post.title}</p>
+                        <div class="row blog-card">
+                            <h3>${post.title}</h3>
                             <p>${post.content}</p>
+                            <a>Edit Post</a> | <a>Delete Post</a>
                         </div>
                     </c:forEach>
                 </c:when>
