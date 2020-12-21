@@ -2,23 +2,26 @@ package com.sample.blog;
 
 import java.util.Date;
 import java.util.UUID;
+import java.util.concurrent.atomic.AtomicLong;
 
 public class BlogPost {
-    private UUID id;
+    private long id;
     private String title;
     private String content;
     private String author;
     private Date postedDate;
 
+    private static final AtomicLong counter = new AtomicLong(100);
+
     public BlogPost(String title, String content, String author) {
-        this.id = UUID.randomUUID();
+        this.id = counter.incrementAndGet();
         this.title = title;
         this.content = content;
         this.author = author;
         this.postedDate = new Date();
     }
 
-    public UUID getId() {
+    public long getId() {
         return id;
     }
 

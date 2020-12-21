@@ -20,7 +20,7 @@
             <div class="row" style="height:200px">
                 <h2>MyBlog</h2>
             </div>
-            <form action ="jsp/new-employee.jsp">
+            <form action ="jsp/post-form.jsp">
                 <button type="submit" class="btn btn-primary btn-md">New Post</button>
                 <br></br>
             </form>
@@ -30,7 +30,7 @@
                         <div class="row blog-card">
                             <h3>${post.title}</h3>
                             <p>${post.content}</p>
-                            <a>Edit Post</a> | <a>Delete Post</a>
+                            <a href="/blog?postId=${post.id}&getType=getById">Edit Post</a> | <a>Delete Post</a>
                         </div>
                     </c:forEach>
                 </c:when>
