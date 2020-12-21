@@ -17,14 +17,24 @@
     </head>
     <body>
         <div class="container">
-            <div class="row" style="height:200px">
+            <div class="row" style="height:100px">
                 <h2>MyBlog</h2>
+                <p>
+                    This is a very simple CRUD app that uses JSP and Java to allow the user to read, edit, create, and delete blog posts.
+                <p>
             </div>
+            <c:if test="${not empty message}">
+                <div class="alert alert-success">
+                    ${message}
+                </div>
+            </c:if>
+            <form action ="jsp/post-form.jsp">
+                <button type="submit" class="btn btn-primary btn-md">New Post</button>
+            </form>
+            <br /><br />
             <form action ="blog" method="post" id="post-form" role="form">
                 <input type="hidden" id="postId" name="postId">
                 <input type="hidden" id="action" name="action">
-                <button type="submit" class="btn btn-primary btn-md">New Post</button>
-                <br />
                 <c:choose>
                     <c:when test="${not empty posts}">
                         <c:forEach var="post" items="${posts}">

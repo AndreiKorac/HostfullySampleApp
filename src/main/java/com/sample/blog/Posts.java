@@ -13,6 +13,7 @@ public class Posts {
     }
 
     public static ArrayList<BlogPost> getData() {
+        posts.sort((p1, p2) ->  Long.valueOf(p2.getPostedDate().getTime()).compareTo(p1.getPostedDate().getTime()));
         return posts;
     }
 }
