@@ -18,9 +18,7 @@
                     <input type="text" name="title" id="title" class="form-control" value="${post.title}" required="true" />
 
                     <label for="content" class="control-label col-xs-4">Content</label>
-                    <textarea rows="4" cols="50" name="content" id="content" class="form-control" required="true">
-                        <c:out value="${post.content}" />
-                    </textarea>
+                    <textarea rows="4" cols="50" name="content" id="content" class="form-control" required="true"><c:out value="${post.content}" /></textarea>
 
                     <br />
                     <button type="submit" class="btn btn-primary  btn-md">Accept</button>

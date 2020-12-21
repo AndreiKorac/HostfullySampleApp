@@ -3,6 +3,7 @@ package com.sample.blog;
 import java.util.ArrayList;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.function.Predicate;
 
 public class PostService {
     // In reality this would likely be a repository/data access layer reference to the database table
@@ -37,5 +38,10 @@ public class PostService {
         } else {
             return false;
         }
+    }
+
+    public boolean deletePost(long id) {
+        Predicate<BlogPost> postToDelete = e -> e.getId() == id;
+        return blogPosts.removeIf(postToDelete);
     }
 }

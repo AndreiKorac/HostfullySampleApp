@@ -42,7 +42,7 @@ public class BlogServlet extends HttpServlet {
     }
 
     private void getPostById(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-        long id = Integer.valueOf(req.getParameter("postId"));
+        long id = Integer.parseInt(req.getParameter("postId"));
         BlogPost post = null;
         try {
             post = postService.getPostById(id);
@@ -65,6 +65,9 @@ public class BlogServlet extends HttpServlet {
             case "edit":
                 editPost(req, res);
                 break;
+            case "remove":
+                deletePost(req, res);
+                break;
         }
     }
 
@@ -82,15 +85,30 @@ public class BlogServlet extends HttpServlet {
     }
 
     private void editPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-        long id = Integer.valueOf(req.getParameter("content"));
+        long id = Integer.parseInt(req.getParameter("postId"));
         String title = req.getParameter("title");
         String content = req.getParameter("content");
 
         boolean success = postService.updatePost(id, title, content);
         String result = null;
         if (success) {
-            result = req.getParameter("content");
+            result = req.getParameter("message");
+            req.setAttribute("message", result);
         }
+
+        ArrayList<BlogPost> newPostsList = postService.getAllPosts();
+        forwardGetAllPosts(req, res, newPostsList);
+    }
+
+    private void deletePost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+        long id = Integer.parseInt(req.getParameter("postId"));
+        boolean success = postService.deletePost(id);
+        String result = null;
+        if (success) {
+            result = req.getParameter("message");
+            req.setAttribute("message", result);
+        }
+
         ArrayList<BlogPost> newPostsList = postService.getAllPosts();
         forwardGetAllPosts(req, res, newPostsList);
     }
